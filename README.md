@@ -3,7 +3,7 @@ Simple node cron/API project that pulls data from AlphaVantage API and has an en
 
 To use this
 * Get a free API key from AlphaVantage (https://www.alphavantage.co/support/#api-key)
-* Create an .env file with the following information
+* Create an .env file with the following 
 
 PORT=3128
 
