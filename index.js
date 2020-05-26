@@ -24,18 +24,17 @@ const cronService = require('./src/services/cron');
 dotenv.config();
 const port = process.env.PORT || 3128;
 
-
 // * Gets raw data from AlphaVantage and stores it in a sqlite db
 // * Run every 5 minutes, from 9am-4pm EDT, Monday-Friday
 // * https://crontab.guru/
 cron.schedule('*/5 9-16 * * 1-5', async() => {
-//cron.schedule('*/5 * * * * *', async() => {
-    //cronService.updateStocks();
+    cronService.updateStocks();
 }, {
     start: true,
     timeZone: 'US/Eastern'
 });
 
+//cron.schedule('*/5 * * * * *', async() => {
 
 app.use(cors());
 app.use('/stocks', stocksRoutes);
