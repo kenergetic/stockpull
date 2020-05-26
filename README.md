@@ -6,6 +6,9 @@ To use this
 * Create an .env file with the following information
 
 PORT=3128
+
 AV_BASE_URL=https://www.alphavantage.co
+
 AV_API_KEY=<YOUR_API_KEY>
+
 AV_OUTPUT_SIZE=full
