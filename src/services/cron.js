@@ -44,6 +44,11 @@ const getApiData = async(apiRows, stockSymbol) => {
                     volume: data[results][key]['5. volume'],
                 }
                 apiRows.push(tick);
+
+                // // Debug: Show some recent closing candles for API closing changes
+                // if (moment(tick.date).isAfter(moment().subtract(30, 'minutes'))) {
+                //     console.log(tick.date + ' - ' + tick.close);
+                // }
             }
         }
     );

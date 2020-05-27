@@ -26,7 +26,7 @@ module.exports = {
         // -- Create table if it doesn't exist -- 
         let query = await db.prepare(`CREATE TABLE IF NOT EXISTS spy (
             name TEXT, 
-            date TEXT UNIQUE, 
+            date TEXT NOT NULL PRIMARY KEY, 
             open REAL, 
             high REAL, 
             low REAL, 
@@ -42,7 +42,7 @@ module.exports = {
         let totalRows = query['COUNT(*)'];
 
         // -- Bulk insert, ignoring duplicate dates (text date values) 
-        const insert = await db.prepare(`INSERT OR IGNORE INTO 
+        const insert = await db.prepare(`INSERT OR REPLACE INTO 
         spy(name, date, open, high, low, close, volume) 
         VALUES(?, ?, ?, ?, ?, ?, ?) `);
 
@@ -66,11 +66,6 @@ module.exports = {
         query = await db.prepare(`SELECT COUNT(*) FROM spy`).get();
         totalRows = query['COUNT(*)'] - totalRows;
         console.log(totalRows + ' records added');
-
-        // -- Select records --
-        // query = db.prepare(`SELECT * FROM spy`).all();
-        // if (query.length > 0) {
-        // }
 
         // close the database connection
         db.close((err) => {

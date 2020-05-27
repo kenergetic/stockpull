@@ -25,9 +25,11 @@ dotenv.config();
 const port = process.env.PORT || 3128;
 
 // * Gets raw data from AlphaVantage and stores it in a sqlite db
-// * Run every 5 minutes, from 9am-4pm EDT, Monday-Friday
+// * Run from 9am-4pm EDT, Monday-Friday
 // * https://crontab.guru/
-cron.schedule('*/5 9-16 * * 1-5', async() => {
+// * Note: Pull more frequently then the 5 minute candle - close values sometimes update
+//      - AlphaVantage is limited to 500 API calls per day
+cron.schedule('*/2 9-16 * * 1-5', async() => {
     cronService.updateStocks();
 }, {
     start: true,
